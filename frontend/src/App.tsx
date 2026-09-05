@@ -117,7 +117,7 @@ export function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[#16110a] text-white pb-24 selection:bg-[#F2E829] selection:text-black">
+    <div className="min-h-screen bg-[#EDD377] text-black pb-24 selection:bg-[#F27430] selection:text-black">
       {/* Top Header */}
       <Header
         onOpenCalendar={() => setShowCalendar(true)}
@@ -157,43 +157,43 @@ export function App() {
 
           {/* 4. Warangal Exploration Progress Meter */}
           <div className="px-4 py-3 max-w-md mx-auto">
-            <div className="bg-[#241b12] p-3.5 rounded-2xl border-3 border-black shadow-retro">
+            <div className="bg-[#F2B949] p-3.5 rounded-2xl border-3 border-black shadow-retro text-black">
               <div className="flex items-center justify-between mb-1.5">
-                <span className="text-xs font-heading font-extrabold text-white flex items-center gap-1.5">
+                <span className="text-xs font-heading font-extrabold text-black flex items-center gap-1.5">
                   🗺️ EXPLORATION PROGRESS
                 </span>
-                <span className="font-pixel text-xs text-[#F2E829]">
+                <span className="font-pixel text-xs text-black font-extrabold">
                   {stats?.unlocked_percent || 12}% UNLOCKED
                 </span>
               </div>
 
               {/* Progress Bar */}
-              <div className="w-full h-3 bg-[#18130d] rounded-full border-2 border-black overflow-hidden p-0.5">
+              <div className="w-full h-3.5 bg-[#EDD377] rounded-full border-2 border-black overflow-hidden p-0.5">
                 <div
-                  className="h-full bg-gradient-to-r from-[#F2E829] via-[#F2B949] to-[#F27430] rounded-full transition-all duration-500"
+                  className="h-full bg-gradient-to-r from-[#F2E829] to-[#F27430] rounded-full border-r-2 border-black transition-all duration-500"
                   style={{ width: `${Math.max(stats?.unlocked_percent || 12, 8)}%` }}
                 ></div>
               </div>
 
-              <div className="text-[11px] text-[#EDD377] font-mono mt-1.5 flex items-center justify-between">
+              <div className="text-[11px] text-black font-mono font-medium mt-1.5 flex items-center justify-between">
                 <span>{stats?.progress_copy || "12% unlocked. Warangal still has secrets."}</span>
-                <span className="text-[#F2B949] font-bold">{stats?.new_discoveries || 0} new finds</span>
+                <span className="text-black font-extrabold">{stats?.new_discoveries || 0} new finds</span>
               </div>
             </div>
           </div>
 
           {/* 5. Today's Mission */}
           <div className="px-4 py-2 max-w-md mx-auto">
-            <div className="bg-gradient-to-r from-[#241b12] to-[#342416] p-4 rounded-2xl border-3 border-[#F27430] shadow-retro flex items-center justify-between">
+            <div className="bg-[#F2E829] p-4 rounded-2xl border-3 border-black shadow-retro flex items-center justify-between text-black">
               <div>
                 <div className="flex items-center gap-1.5">
-                  <span className="text-[10px] font-pixel text-[#F27430] uppercase font-bold">🎯 TODAY'S MISSION</span>
-                  <span className="text-[9px] bg-[#F27430]/30 text-white px-1.5 rounded font-mono font-bold">+100 PTS</span>
+                  <span className="text-[10px] font-pixel text-black uppercase font-extrabold">🎯 TODAY'S MISSION</span>
+                  <span className="text-[9px] bg-[#F27430] text-black px-1.5 py-0.5 rounded font-mono font-extrabold border border-black">+100 PTS</span>
                 </div>
-                <h3 className="font-heading font-extrabold text-sm text-white mt-1">
+                <h3 className="font-heading font-extrabold text-sm text-black mt-1">
                   Sunset & Chai Quest 🥭
                 </h3>
-                <p className="text-xs text-[#EDD377] font-heading mt-0.5">
+                <p className="text-xs text-black font-heading mt-0.5 font-medium">
                   Visit Waddepally or Bhadrakali Lake before 6:45 PM.
                 </p>
               </div>
@@ -210,12 +210,12 @@ export function App() {
           {/* 6. NEW IN WARANGAL (Part 26) */}
           <div className="px-4 py-3 max-w-md mx-auto">
             <div className="flex items-center justify-between mb-2">
-              <h3 className="font-heading font-extrabold text-sm text-white flex items-center gap-1.5">
-                <Sparkles size={16} className="text-[#F2E829]" /> NEW IN WARANGAL 🆕
+              <h3 className="font-heading font-extrabold text-sm text-black flex items-center gap-1.5">
+                <Sparkles size={16} className="text-[#F27430]" /> NEW IN WARANGAL 🆕
               </h3>
               <button
                 onClick={() => setCurrentTab('food')}
-                className="text-xs text-[#F2B949] font-mono hover:underline font-bold"
+                className="text-xs text-black font-mono hover:underline font-bold"
               >
                 View all
               </button>
@@ -226,18 +226,18 @@ export function App() {
                 <div
                   key={`new-f-${f.id}`}
                   onClick={() => openDetail(f.id, 'food')}
-                  className="min-w-[170px] bg-[#241b12] rounded-xl border-3 border-black shadow-retro-sm p-3 cursor-pointer hover:border-[#F2B949] transition-all"
+                  className="min-w-[170px] bg-[#F2B949] rounded-xl border-3 border-black shadow-retro-sm p-3 cursor-pointer hover:bg-[#F2E829] transition-all text-black"
                 >
-                  <span className="text-[9px] bg-[#F2E829] text-black font-extrabold px-1.5 py-0.5 rounded">
+                  <span className="text-[9px] bg-[#F2E829] text-black font-extrabold px-1.5 py-0.5 rounded border border-black">
                     JUST OPENED
                   </span>
-                  <h4 className="font-heading font-bold text-xs text-white mt-1.5 truncate">
+                  <h4 className="font-heading font-bold text-xs text-black mt-1.5 truncate">
                     {f.name}
                   </h4>
-                  <div className="text-[10px] text-[#EDD377] font-mono truncate">
+                  <div className="text-[10px] text-black font-mono font-medium truncate">
                     {f.category} • {f.area}
                   </div>
-                  <div className="text-[10px] text-[#F2E829] font-bold mt-1">
+                  <div className="text-[10px] text-black font-extrabold mt-1">
                     ★ {f.rating}
                   </div>
                 </div>
@@ -248,12 +248,12 @@ export function App() {
           {/* 7. NEAR YOU (Part 25) */}
           <div className="px-4 py-3 max-w-md mx-auto">
             <div className="flex items-center justify-between mb-2">
-              <h3 className="font-heading font-extrabold text-sm text-white flex items-center gap-1.5">
+              <h3 className="font-heading font-extrabold text-sm text-black flex items-center gap-1.5">
                 <MapPin size={16} className="text-[#F27430]" /> POPULAR NEAR YOU 📍
               </h3>
               <button
                 onClick={() => setShowMap(true)}
-                className="text-xs text-[#F2B949] font-mono hover:underline font-bold"
+                className="text-xs text-black font-mono hover:underline font-bold"
               >
                 Open Map
               </button>
@@ -264,19 +264,19 @@ export function App() {
                 <div
                   key={`near-${p.id}`}
                   onClick={() => openDetail(p.id, 'food')}
-                  className="p-3 bg-[#241b12] rounded-xl border-3 border-black shadow-retro-sm flex items-center justify-between cursor-pointer hover:border-[#F2B949] transition-all"
+                  className="p-3 bg-[#F2B949] rounded-xl border-3 border-black shadow-retro-sm flex items-center justify-between cursor-pointer hover:bg-[#F2E829] transition-all text-black"
                 >
                   <div>
-                    <h4 className="font-heading font-bold text-xs text-white">
+                    <h4 className="font-heading font-bold text-xs text-black">
                       {p.name}
                     </h4>
-                    <div className="text-[10px] text-[#EDD377] font-mono">
+                    <div className="text-[10px] text-black font-mono font-medium">
                       {p.category} • {p.area} • {p.best_known_for}
                     </div>
                   </div>
                   <div className="text-right">
-                    <span className="text-[#F2E829] font-bold text-xs">★ {p.rating}</span>
-                    <div className="text-[10px] text-gray-400 font-mono">{p.price_range}</div>
+                    <span className="text-black font-extrabold text-xs">★ {p.rating}</span>
+                    <div className="text-[10px] text-black font-mono font-bold">{p.price_range}</div>
                   </div>
                 </div>
               ))}
@@ -315,13 +315,13 @@ export function App() {
         </main>
       )}
 
-      {/* Floating Bottom Nav Bar in Mango Popsicle Palette */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-[#18130d]/95 backdrop-blur-md border-t-3 border-black shadow-retro z-40 px-3 py-2">
+      {/* Floating Bottom Nav Bar in Mango Popsicle Palette with Black Text */}
+      <nav className="fixed bottom-0 left-0 right-0 bg-[#F2B949] border-t-3 border-black shadow-retro z-40 px-3 py-2 text-black">
         <div className="max-w-md mx-auto grid grid-cols-5 gap-1 text-center">
           <button
             onClick={() => { sound.playClick(); setCurrentTab('home'); }}
             className={`py-1.5 flex flex-col items-center justify-center rounded-xl transition-all ${
-              currentTab === 'home' ? 'text-[#F2E829] font-extrabold bg-[#241b12] border border-black shadow-retro-sm' : 'text-[#EDD377]/60 hover:text-white'
+              currentTab === 'home' ? 'text-black font-black bg-[#F2E829] border-2 border-black shadow-retro-sm' : 'text-black/75 hover:text-black font-bold'
             }`}
           >
             <Home size={18} />
@@ -331,7 +331,7 @@ export function App() {
           <button
             onClick={() => { sound.playClick(); setCurrentTab('food'); }}
             className={`py-1.5 flex flex-col items-center justify-center rounded-xl transition-all ${
-              currentTab === 'food' ? 'text-[#F27430] font-extrabold bg-[#241b12] border border-black shadow-retro-sm' : 'text-[#EDD377]/60 hover:text-white'
+              currentTab === 'food' ? 'text-black font-black bg-[#F27430] border-2 border-black shadow-retro-sm' : 'text-black/75 hover:text-black font-bold'
             }`}
           >
             <Utensils size={18} />
@@ -343,16 +343,16 @@ export function App() {
             onClick={() => { sound.playClick(); setShowDice(true); }}
             className="flex flex-col items-center justify-center -mt-5 group"
           >
-            <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-[#F2E829] via-[#F2B949] to-[#F27430] border-3 border-black shadow-retro flex items-center justify-center text-2xl group-hover:rotate-12 transition-transform">
+            <div className="w-12 h-12 rounded-full bg-[#F2E829] border-3 border-black shadow-retro flex items-center justify-center text-2xl group-hover:rotate-12 transition-transform">
               🎲
             </div>
-            <span className="text-[10px] font-pixel text-[#F2E829] mt-0.5 font-bold">Roll</span>
+            <span className="text-[10px] font-pixel text-black mt-0.5 font-black">Roll</span>
           </button>
 
           <button
             onClick={() => { sound.playClick(); setCurrentTab('explore'); }}
             className={`py-1.5 flex flex-col items-center justify-center rounded-xl transition-all ${
-              currentTab === 'explore' ? 'text-[#F2B949] font-extrabold bg-[#241b12] border border-black shadow-retro-sm' : 'text-[#EDD377]/60 hover:text-white'
+              currentTab === 'explore' ? 'text-black font-black bg-[#EDD377] border-2 border-black shadow-retro-sm' : 'text-black/75 hover:text-black font-bold'
             }`}
           >
             <Compass size={18} />
@@ -361,7 +361,7 @@ export function App() {
 
           <button
             onClick={() => { sound.playClick(); setShowCalendar(true); }}
-            className="py-1.5 flex flex-col items-center justify-center rounded-xl text-[#EDD377]/60 hover:text-[#EDD377]"
+            className="py-1.5 flex flex-col items-center justify-center rounded-xl text-black/75 hover:text-black font-bold"
           >
             <CalendarIcon size={18} />
             <span className="text-[10px] font-heading mt-0.5">Diary</span>

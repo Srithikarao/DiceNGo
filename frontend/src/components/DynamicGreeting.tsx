@@ -47,15 +47,15 @@ export const DynamicGreeting: React.FC<DynamicGreetingProps> = ({ userName = "Ex
 
   return (
     <div className="px-4 pt-3 pb-1 max-w-md mx-auto">
-      <div className="bg-gradient-to-r from-[#241b12] to-[#342416] p-3.5 rounded-xl border-3 border-black shadow-retro flex items-center justify-between">
+      <div className="bg-[#F2E829] p-3.5 rounded-xl border-3 border-black shadow-retro flex items-center justify-between text-black">
         <div>
-          <h2 className="font-heading font-extrabold text-base text-white leading-snug">
+          <h2 className="font-heading font-black text-base text-black leading-snug">
             {greeting}
           </h2>
-          <div className="text-[11px] text-[#EDD377] font-mono mt-0.5 flex items-center gap-1.5 flex-wrap">
+          <div className="text-[11px] text-black font-mono mt-0.5 flex items-center gap-1.5 flex-wrap font-medium">
             <span>📍 Warangal • Hanamkonda • Kazipet</span>
             {totalVisits > 0 && (
-              <span className="text-[#F2E829] font-bold">• {totalVisits} visits logged</span>
+              <span className="text-black font-black bg-[#F2B949] px-1.5 py-0.5 rounded border border-black">• {totalVisits} visits logged</span>
             )}
           </div>
         </div>

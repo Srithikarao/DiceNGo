@@ -186,12 +186,12 @@ export const WarangalMapModal: React.FC<WarangalMapModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-2 sm:p-4 backdrop-blur-sm overflow-hidden">
-      <div className="bg-[#241b12] w-full max-w-lg rounded-2xl border-3 border-black shadow-retro-xl p-3 sm:p-4 relative flex flex-col h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-2 sm:p-4 backdrop-blur-sm overflow-hidden text-black">
+      <div className="bg-[#EDD377] w-full max-w-lg rounded-2xl border-4 border-black shadow-retro-xl p-3 sm:p-4 relative flex flex-col h-[90vh] text-black">
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 bg-[#18130d] text-gray-300 hover:text-white p-2 rounded-full z-30 border border-black shadow-retro-sm"
+          className="absolute top-3 right-3 bg-[#F2E829] text-black hover:opacity-75 p-2 rounded-full z-30 border-2 border-black shadow-retro-sm"
           aria-label="Close Map"
         >
           <X size={18} />
@@ -199,10 +199,10 @@ export const WarangalMapModal: React.FC<WarangalMapModalProps> = ({
 
         {/* Header */}
         <div className="mb-2 pr-10">
-          <div className="text-[10px] font-pixel text-[#F2E829] tracking-widest uppercase flex items-center gap-1.5">
+          <div className="text-[10px] font-pixel text-black tracking-widest uppercase flex items-center gap-1.5 font-black">
             <span>🥭</span> MANGO POPSICLE EXPLORATION MAP
           </div>
-          <h2 className="font-pixel text-xs sm:text-sm text-white mt-0.5 truncate">
+          <h2 className="font-pixel text-xs sm:text-sm text-black mt-0.5 truncate font-black">
             🗺️ WARANGAL • HANAMKONDA • KAZIPET
           </h2>
         </div>
@@ -213,10 +213,10 @@ export const WarangalMapModal: React.FC<WarangalMapModalProps> = ({
             <button
               key={flt}
               onClick={() => { sound.playClick(); setActiveFilter(flt); }}
-              className={`px-3 py-1 text-xs font-heading font-bold rounded-lg border-2 border-black transition-all shadow-retro-sm whitespace-nowrap ${
+              className={`px-3 py-1 text-xs font-heading font-black rounded-lg border-2 border-black transition-all shadow-retro-sm whitespace-nowrap ${
                 activeFilter === flt
-                  ? 'bg-[#F2E829] text-black font-extrabold translate-y-[-1px]'
-                  : 'bg-[#18130d] text-[#EDD377] hover:bg-[#302419]'
+                  ? 'bg-[#F27430] text-black translate-y-[-1px]'
+                  : 'bg-[#F2B949] text-black hover:bg-[#F2E829]'
               }`}
             >
               {flt === 'All' && `🌐 All (${places.food.length + places.explore.length + places.events.length})`}
@@ -229,21 +229,21 @@ export const WarangalMapModal: React.FC<WarangalMapModalProps> = ({
 
         {/* Quick Jump Area Chips */}
         <div className="flex items-center gap-1.5 mb-2 overflow-x-auto pb-1 text-[11px] font-heading z-10 no-scrollbar">
-          <span className="text-[#EDD377] text-[10px] font-mono flex items-center gap-0.5 whitespace-nowrap">
+          <span className="text-black text-[10px] font-mono flex items-center gap-0.5 whitespace-nowrap font-black">
             <Navigation size={11} className="text-[#F27430]" /> Jump:
           </span>
           {JUMP_POINTS.map(pt => (
             <button
               key={pt.label}
               onClick={() => handleJump(pt.lat, pt.lng, pt.zoom)}
-              className="px-2 py-0.5 bg-[#302419] hover:bg-[#F2B949] hover:text-black text-gray-200 border border-black rounded-md whitespace-nowrap transition-colors"
+              className="px-2 py-0.5 bg-[#F2B949] hover:bg-[#F2E829] text-black border-2 border-black rounded-md whitespace-nowrap transition-colors font-black"
             >
               {pt.label}
             </button>
           ))}
           <button
             onClick={handleRecenter}
-            className="p-1 bg-[#F27430] text-black rounded-md border border-black hover:bg-[#F2B949] ml-auto flex items-center justify-center"
+            className="p-1 bg-[#F27430] text-black rounded-md border-2 border-black hover:bg-[#F2B949] ml-auto flex items-center justify-center font-bold"
             title="Recenter Map"
           >
             <LocateFixed size={12} />
@@ -251,7 +251,7 @@ export const WarangalMapModal: React.FC<WarangalMapModalProps> = ({
         </div>
 
         {/* Map Container */}
-        <div className="flex-1 w-full rounded-xl border-3 border-black overflow-hidden relative shadow-retro-sm bg-[#18130d]">
+        <div className="flex-1 w-full rounded-xl border-3 border-black overflow-hidden relative shadow-retro-sm bg-[#F2B949]">
           <div ref={mapContainerRef} className="w-full h-full" style={{ minHeight: '280px' }} />
           {loading && (
             <div className="absolute inset-0 bg-black/60 flex items-center justify-center z-20">
@@ -263,7 +263,7 @@ export const WarangalMapModal: React.FC<WarangalMapModalProps> = ({
         </div>
 
         {/* Legend */}
-        <div className="mt-2 flex items-center justify-between text-[10px] font-heading text-gray-300 px-1">
+        <div className="mt-2 flex items-center justify-between text-[10px] font-heading text-black px-1 font-bold">
           <div className="flex items-center gap-3">
             <span className="flex items-center gap-1">
               <span className="w-2.5 h-2.5 rounded-full bg-[#F2E829] border border-black inline-block"></span> Food
@@ -275,7 +275,7 @@ export const WarangalMapModal: React.FC<WarangalMapModalProps> = ({
               <span className="w-2.5 h-2.5 rounded-full bg-[#F27430] border border-black inline-block"></span> Events
             </span>
           </div>
-          <span className="text-[#EDD377] font-mono">Tap any pin for details</span>
+          <span className="text-black font-mono font-bold">Tap pin for details</span>
         </div>
       </div>
     </div>

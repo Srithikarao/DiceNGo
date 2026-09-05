@@ -716,12 +716,47 @@ export const staticClient = {
   },
 
   // Admin
-  async getAdminStats(adminKey: string) {
+  async getAdminStats(_adminKey: string) {
     return {
       food_places: foodDatabase.length,
       explore_places: exploreDatabase.length,
       events: eventDatabase.length,
       total_records: foodDatabase.length + exploreDatabase.length + eventDatabase.length
     };
+  },
+
+  async createFoodPlace(payload: any) {
+    const newId = foodDatabase.length + 1000;
+    const newItem = {
+      id: newId,
+      name: payload.name,
+      category: payload.category || "Biryani",
+      cuisine: "Multi Cuisine",
+      address: payload.address || "Hanamkonda, Warangal",
+      area: payload.area || "Hanamkonda",
+      latitude: 18.0073,
+      longitude: 79.5668,
+      maps_url: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(payload.name + " Warangal")}`,
+      opening_time: "11:00 AM",
+      closing_time: "11:00 PM",
+      rating: payload.rating || 4.5,
+      review_count: 50,
+      price_range: payload.price_range || "₹₹ (Moderate)",
+      best_known_for: payload.best_known_for || "Special dishes",
+      veg: payload.veg ?? true,
+      non_veg: payload.non_veg ?? true,
+      indoor_seating: true,
+      outdoor_seating: false,
+      parking: true,
+      discounts: "Student discount 10%",
+      seating_capacity: 40,
+      instagram_url: "",
+      images: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80",
+      description: "Added through Admin console.",
+      is_new: true,
+      is_featured: false
+    };
+    foodDatabase.unshift(newItem);
+    return newItem;
   }
 };

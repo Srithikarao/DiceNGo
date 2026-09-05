@@ -71,12 +71,12 @@ export const DiceModal: React.FC<DiceModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm">
-      <div className="bg-[#241b12] w-full max-w-sm rounded-2xl border-3 border-black shadow-retro-xl p-5 relative scanlines overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm text-black">
+      <div className="bg-[#EDD377] w-full max-w-sm rounded-2xl border-4 border-black shadow-retro-xl p-5 relative overflow-hidden text-black">
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-white p-1 z-30"
+          className="absolute top-4 right-4 text-black hover:opacity-75 p-1 z-30"
           aria-label="Close"
         >
           <X size={20} />
@@ -84,28 +84,28 @@ export const DiceModal: React.FC<DiceModalProps> = ({
 
         {/* Title in Mango Popsicle Palette */}
         <div className="text-center mb-4">
-          <div className="text-[10px] font-pixel text-[#F27430] tracking-widest uppercase font-bold">
+          <div className="text-[10px] font-pixel text-black tracking-widest uppercase font-black">
             REMOVE DECISION FATIGUE
           </div>
-          <h2 className="font-pixel text-lg text-[#F2E829] mt-0.5">
+          <h2 className="font-pixel text-lg text-black mt-0.5 font-black">
             🎲 DICE & GO 🥭
           </h2>
-          <p className="text-xs text-[#EDD377] font-heading">
+          <p className="text-xs text-black font-heading font-semibold">
             Stop arguing. Let the dice decide.
           </p>
         </div>
 
         {/* Mode Selector Tabs */}
         {!result && (
-          <div className="grid grid-cols-4 gap-1.5 p-1 bg-[#18130d] rounded-xl border-2 border-black mb-5">
+          <div className="grid grid-cols-4 gap-1.5 p-1.5 bg-[#F2B949] rounded-xl border-2 border-black mb-5">
             {(['Food', 'Explore', 'Events', 'Surprise Me'] as const).map((m) => (
               <button
                 key={m}
                 onClick={() => { sound.playClick(); setMode(m); }}
-                className={`py-2 px-1 text-[11px] font-heading font-bold rounded-lg transition-all ${
+                className={`py-2 px-1 text-[11px] font-heading font-black rounded-lg transition-all ${
                   mode === m
-                    ? 'bg-[#F2E829] text-black shadow-retro-sm font-extrabold translate-y-[-1px]'
-                    : 'text-[#EDD377] hover:text-[#F2E829]'
+                    ? 'bg-[#F27430] text-black shadow-retro-sm translate-y-[-1px] border border-black'
+                    : 'text-black/80 hover:text-black'
                 }`}
               >
                 {m === 'Food' && '🍜 Food'}
@@ -119,14 +119,14 @@ export const DiceModal: React.FC<DiceModalProps> = ({
 
         {/* Rolling Reel Animation State */}
         {isRolling && (
-          <div className="my-8 text-center py-6 bg-[#18130d] rounded-xl border-2 border-black shadow-retro">
+          <div className="my-8 text-center py-6 bg-[#F2E829] rounded-xl border-3 border-black shadow-retro text-black">
             <div className="text-5xl mb-3 animate-[spin_0.8s_linear_infinite]">
               🎲
             </div>
-            <div className="font-pixel text-xs text-[#F2E829] animate-pulse">
+            <div className="font-pixel text-xs text-black font-black animate-pulse">
               {reelText}
             </div>
-            <div className="text-[10px] text-[#F2B949] font-mono mt-2">
+            <div className="text-[10px] text-black font-mono font-bold mt-2">
               CONSULTING WARANGAL SPIRITS... 🥭
             </div>
           </div>
@@ -144,7 +144,7 @@ export const DiceModal: React.FC<DiceModalProps> = ({
 
             <button
               onClick={handleRoll}
-              className="w-full py-4 bg-[#F2E829] hover:bg-[#F2B949] text-black font-pixel text-xs tracking-wider uppercase rounded-xl retro-btn shadow-retro-lg flex items-center justify-center gap-2 transition-colors"
+              className="w-full py-4 bg-[#F27430] hover:bg-[#F2E829] text-black font-pixel text-xs tracking-wider uppercase rounded-xl retro-btn shadow-retro-lg flex items-center justify-center gap-2 transition-colors font-black"
             >
               ROLL THE DICE ⚡
             </button>
@@ -155,9 +155,9 @@ export const DiceModal: React.FC<DiceModalProps> = ({
                 id="allowFamiliar"
                 checked={allowFamiliar}
                 onChange={(e) => setAllowFamiliar(e.target.checked)}
-                className="w-4 h-4 accent-[#F2B949] rounded cursor-pointer"
+                className="w-4 h-4 accent-[#F27430] rounded cursor-pointer"
               />
-              <label htmlFor="allowFamiliar" className="text-xs text-[#EDD377] font-heading cursor-pointer">
+              <label htmlFor="allowFamiliar" className="text-xs text-black font-heading font-semibold cursor-pointer">
                 Include places I've already visited
               </label>
             </div>
@@ -167,30 +167,30 @@ export const DiceModal: React.FC<DiceModalProps> = ({
         {/* Rolled Result Presentation */}
         {!isRolling && result && result.item && (
           <div className="my-2 animate-[fadeIn_0.2s_ease-out]">
-            <div className="bg-[#18130d] rounded-2xl border-3 border-[#F2B949] shadow-retro-lg p-4 relative overflow-hidden">
+            <div className="bg-[#F2B949] rounded-2xl border-3 border-black shadow-retro-lg p-4 relative overflow-hidden text-black">
               <div className="washi-tape"></div>
 
               <div className="flex items-center justify-between mb-1 mt-1">
-                <span className="text-[10px] font-mono px-2 py-0.5 bg-[#241b12] text-[#F2B949] rounded border border-black font-bold">
+                <span className="text-[10px] font-mono px-2 py-0.5 bg-[#EDD377] text-black rounded border border-black font-black">
                   {result.item.category}
                 </span>
-                <span className="text-[10px] text-gray-300 font-mono">
+                <span className="text-[10px] text-black font-mono font-bold">
                   📍 {result.item.area} ({result.distance_km || 2.4} km away)
                 </span>
               </div>
 
-              <h3 className="font-heading font-extrabold text-lg text-white mt-1">
+              <h3 className="font-heading font-black text-lg text-black mt-1">
                 {result.item.name || result.item.event_name}
               </h3>
 
-              <div className="text-xs text-[#EDD377] font-heading mt-1">
-                <span className="text-[#F2B949] font-bold">Why this: </span>
+              <div className="text-xs text-black font-heading mt-1 font-medium">
+                <span className="font-black">Why this: </span>
                 {result.item.best_known_for || result.item.description || "Top rated Warangal experience"}
               </div>
 
               {/* Arcade Punchline */}
-              <div className="my-3 p-2.5 bg-[#F27430]/15 rounded-xl border border-[#F27430]/40 text-xs font-heading text-[#F27430] flex items-center gap-2">
-                <Flame size={16} className="shrink-0" />
+              <div className="my-3 p-2.5 bg-[#F2E829] rounded-xl border-2 border-black text-xs font-heading text-black font-black flex items-center gap-2">
+                <Flame size={16} className="shrink-0 text-[#F27430]" />
                 <span>{result.arcade_punchline}</span>
               </div>
 
@@ -201,7 +201,7 @@ export const DiceModal: React.FC<DiceModalProps> = ({
                     onConfirmVisit(result.item.id, result.item_type || 'food');
                     onClose();
                   }}
-                  className="w-full py-3.5 bg-[#F2E829] hover:bg-[#F2B949] text-black font-heading font-extrabold text-sm rounded-xl retro-btn flex items-center justify-center gap-2 transition-colors"
+                  className="w-full py-3.5 bg-[#F27430] hover:bg-[#F2E829] text-black font-heading font-black text-sm rounded-xl retro-btn flex items-center justify-center gap-2 transition-colors"
                 >
                   <CheckCircle2 size={16} /> ACCEPT FATE & GO 🚀
                 </button>
@@ -209,16 +209,16 @@ export const DiceModal: React.FC<DiceModalProps> = ({
                 <div className="grid grid-cols-2 gap-2">
                   <button
                     onClick={() => onSelectDetail(result.item.id, result.item_type || 'food')}
-                    className="py-2.5 bg-[#241b12] hover:bg-[#302419] text-[#EDD377] font-heading font-bold text-xs rounded-xl border-2 border-black flex items-center justify-center gap-1.5 transition-colors"
+                    className="py-2.5 bg-[#EDD377] hover:bg-[#F2E829] text-black font-heading font-black text-xs rounded-xl border-2 border-black flex items-center justify-center gap-1.5 transition-colors"
                   >
-                    <Navigation size={14} className="text-[#F2B949]" /> View Details
+                    <Navigation size={14} /> View Details
                   </button>
 
                   <button
                     onClick={handleRoll}
-                    className="py-2.5 bg-[#302419] hover:bg-[#3d2f21] text-white font-heading font-bold text-xs rounded-xl border-2 border-black flex items-center justify-center gap-1.5 transition-colors"
+                    className="py-2.5 bg-[#F2E829] hover:bg-[#EDD377] text-black font-heading font-black text-xs rounded-xl border-2 border-black flex items-center justify-center gap-1.5 transition-colors"
                   >
-                    <RotateCcw size={14} className="text-[#F27430]" /> Re-roll (1/3)
+                    <RotateCcw size={14} /> Re-roll (1/3)
                   </button>
                 </div>
               </div>

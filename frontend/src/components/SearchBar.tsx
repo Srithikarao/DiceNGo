@@ -63,30 +63,30 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSelectPlace }) => {
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => { if (results) setIsOpen(true); }}
           placeholder="Where do you wanna go? (Biryani, lake, cafe...)"
-          className="w-full bg-[#241b12] border-3 border-black focus:border-[#F2B949] text-white pl-11 pr-10 py-3 rounded-xl font-heading text-sm outline-none shadow-retro placeholder:text-[#EDD377]/60 placeholder:italic transition-colors"
+          className="w-full bg-[#F2E829] border-3 border-black focus:border-[#F27430] text-black pl-11 pr-10 py-3 rounded-xl font-heading font-medium text-sm outline-none shadow-retro placeholder:text-black/60 placeholder:italic transition-colors"
         />
-        <Search className="absolute left-3.5 top-3.5 text-[#F2B949]" size={18} />
+        <Search className="absolute left-3.5 top-3.5 text-black" size={18} />
         {query && (
           <button
             onClick={clearSearch}
-            className="absolute right-3.5 top-3.5 text-gray-400 hover:text-white"
+            className="absolute right-3.5 top-3.5 text-black hover:opacity-75"
           >
             <X size={18} />
           </button>
         )}
       </div>
 
-      {/* Results Dropdown */}
+      {/* Results Dropdown in Mango Popsicle Palette with Black Text */}
       {isOpen && results && (
-        <div className="absolute left-4 right-4 top-14 bg-[#241b12] rounded-xl border-3 border-black shadow-retro-xl p-3 max-h-80 overflow-y-auto z-40">
+        <div className="absolute left-4 right-4 top-14 bg-[#EDD377] rounded-xl border-3 border-black shadow-retro-xl p-3 max-h-80 overflow-y-auto z-40 text-black">
           {loading && (
-            <div className="text-center py-4 text-xs font-mono text-[#EDD377]">
+            <div className="text-center py-4 text-xs font-mono text-black font-bold">
               Searching Warangal spots... 🔍
             </div>
           )}
 
           {!loading && results.food.length === 0 && results.explore.length === 0 && results.events.length === 0 && (
-            <div className="text-center py-4 text-xs text-gray-300 font-mono">
+            <div className="text-center py-4 text-xs text-black font-mono font-medium">
               "We couldn't find that one. Try another keyword!"
             </div>
           )}
@@ -94,7 +94,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSelectPlace }) => {
           {/* Food Results */}
           {results.food.length > 0 && (
             <div className="mb-3">
-              <div className="text-[11px] font-pixel text-[#F2E829] mb-1 flex items-center gap-1 font-bold">
+              <div className="text-[11px] font-pixel text-black mb-1 flex items-center gap-1 font-black">
                 <Utensils size={12} /> FOOD & EATS ({results.food.length})
               </div>
               <div className="space-y-1">
@@ -106,17 +106,17 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSelectPlace }) => {
                       onSelectPlace(item.id, 'food');
                       setIsOpen(false);
                     }}
-                    className="w-full text-left p-2 rounded-lg hover:bg-[#322519] flex items-center justify-between group transition-colors"
+                    className="w-full text-left p-2 rounded-lg hover:bg-[#F2B949] flex items-center justify-between group transition-colors border border-black/20"
                   >
                     <div>
-                      <div className="font-heading font-extrabold text-xs text-white group-hover:text-[#F2E829]">
+                      <div className="font-heading font-black text-xs text-black">
                         {item.name}
                       </div>
-                      <div className="text-[10px] text-[#EDD377] font-mono">
+                      <div className="text-[10px] text-black/80 font-mono font-medium">
                         {item.category} • {item.area}
                       </div>
                     </div>
-                    <span className="text-[11px] font-bold text-[#F2E829]">★ {item.rating}</span>
+                    <span className="text-[11px] font-black text-black">★ {item.rating}</span>
                   </button>
                 ))}
               </div>
@@ -126,7 +126,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSelectPlace }) => {
           {/* Explore Results */}
           {results.explore.length > 0 && (
             <div className="mb-3">
-              <div className="text-[11px] font-pixel text-[#F2B949] mb-1 flex items-center gap-1 font-bold">
+              <div className="text-[11px] font-pixel text-black mb-1 flex items-center gap-1 font-black">
                 <Compass size={12} /> EXPLORE & SIGHTS ({results.explore.length})
               </div>
               <div className="space-y-1">
@@ -138,17 +138,17 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSelectPlace }) => {
                       onSelectPlace(item.id, 'explore');
                       setIsOpen(false);
                     }}
-                    className="w-full text-left p-2 rounded-lg hover:bg-[#322519] flex items-center justify-between group transition-colors"
+                    className="w-full text-left p-2 rounded-lg hover:bg-[#F2B949] flex items-center justify-between group transition-colors border border-black/20"
                   >
                     <div>
-                      <div className="font-heading font-extrabold text-xs text-white group-hover:text-[#F2B949]">
+                      <div className="font-heading font-black text-xs text-black">
                         {item.name}
                       </div>
-                      <div className="text-[10px] text-[#EDD377] font-mono">
+                      <div className="text-[10px] text-black/80 font-mono font-medium">
                         {item.category} • {item.area}
                       </div>
                     </div>
-                    <span className="text-[11px] font-bold text-[#F2E829]">★ {item.rating}</span>
+                    <span className="text-[11px] font-black text-black">★ {item.rating}</span>
                   </button>
                 ))}
               </div>
@@ -158,7 +158,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSelectPlace }) => {
           {/* Events Results */}
           {results.events.length > 0 && (
             <div>
-              <div className="text-[11px] font-pixel text-[#F27430] mb-1 flex items-center gap-1 font-bold">
+              <div className="text-[11px] font-pixel text-black mb-1 flex items-center gap-1 font-black">
                 <Calendar size={12} /> EVENTS & GIGS ({results.events.length})
               </div>
               <div className="space-y-1">
@@ -170,17 +170,17 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSelectPlace }) => {
                       onSelectPlace(item.id, 'event');
                       setIsOpen(false);
                     }}
-                    className="w-full text-left p-2 rounded-lg hover:bg-[#322519] flex items-center justify-between group transition-colors"
+                    className="w-full text-left p-2 rounded-lg hover:bg-[#F2B949] flex items-center justify-between group transition-colors border border-black/20"
                   >
                     <div>
-                      <div className="font-heading font-extrabold text-xs text-white group-hover:text-[#F27430]">
+                      <div className="font-heading font-black text-xs text-black">
                         {item.event_name}
                       </div>
-                      <div className="text-[10px] text-[#EDD377] font-mono">
+                      <div className="text-[10px] text-black/80 font-mono font-medium">
                         {item.venue} • {item.date}
                       </div>
                     </div>
-                    <span className="text-[10px] bg-[#F27430]/25 text-[#F27430] px-2 py-0.5 rounded font-mono font-bold">
+                    <span className="text-[10px] bg-[#F27430] text-black px-2 py-0.5 rounded font-mono font-black border border-black">
                       {item.fee}
                     </span>
                   </button>

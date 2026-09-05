@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Press+Start+2P&family=Space+Grotesk:wght@500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Press+Start+2P&family=Space+Grotesk:wght@500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -12,28 +12,27 @@
   --color-arcade-gold: #F2B949;
   --color-arcade-cream: #EDD377;
 
-  /* Remapped arcade colors to mango popsicle palette */
   --color-arcade-pink: #F27430;
   --color-arcade-cyan: #F2B949;
   --color-arcade-green: #EDD377;
   --color-arcade-diner: #F27430;
 
-  --color-arcade-bg: #16110a;
-  --color-arcade-card: #241b12;
-  --color-arcade-card-hover: #322519;
+  --color-arcade-bg: #EDD377;
+  --color-arcade-card: #F2B949;
+  --color-arcade-card-hover: #EDD377;
 }
 
-/* Base Reset & Typography with Mango Popsicle Vibe */
+/* Base Reset & Typography - 100% Mango Popsicle with Black Text */
 body {
   margin: 0;
   padding: 0;
-  background-color: #16110a;
+  background-color: #EDD377;
   background-image: 
-    radial-gradient(circle at 50% 0%, rgba(242, 185, 73, 0.18) 0%, transparent 60%),
-    radial-gradient(circle at 85% 30%, rgba(242, 116, 48, 0.12) 0%, transparent 50%),
-    radial-gradient(circle at 15% 80%, rgba(242, 232, 41, 0.08) 0%, transparent 50%);
+    radial-gradient(circle at 50% 0%, rgba(242, 185, 73, 0.25) 0%, transparent 60%),
+    radial-gradient(circle at 85% 30%, rgba(242, 116, 48, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 15% 80%, rgba(242, 232, 41, 0.20) 0%, transparent 50%);
   background-attachment: fixed;
-  color: #fdfcf7;
+  color: #000000;
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -42,30 +41,17 @@ body {
 h1, h2, h3, h4, .font-heading {
   font-family: 'Space Grotesk', sans-serif;
   letter-spacing: -0.02em;
+  color: #000000;
 }
 
 .font-pixel {
   font-family: 'Press Start 2P', monospace;
 }
 
-/* Retro CRT scanlines overlay with warm popsicle tint */
-.scanlines {
-  position: relative;
-}
-.scanlines::after {
-  content: " ";
-  display: block;
-  position: absolute;
-  top: 0; left: 0; bottom: 0; right: 0;
-  background: linear-gradient(rgba(22, 17, 10, 0) 50%, rgba(0, 0, 0, 0.3) 50%), linear-gradient(90deg, rgba(242, 185, 73, 0.04), rgba(242, 116, 48, 0.03), rgba(242, 232, 41, 0.04));
-  z-index: 20;
-  background-size: 100% 3px, 6px 100%;
-  pointer-events: none;
-  opacity: 0.6;
-}
-
-/* Retro Arcade Drop-Shadow Card with Mango border accent */
+/* Retro Arcade Drop-Shadow Card with Black Outlines */
 .retro-card {
+  background-color: #F2B949;
+  color: #000000;
   border: 3px solid #000000;
   box-shadow: 4px 4px 0px #000000;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
@@ -83,7 +69,8 @@ h1, h2, h3, h4, .font-heading {
 .retro-btn {
   border: 3px solid #000000;
   box-shadow: 3px 3px 0px #000000;
-  font-weight: 700;
+  font-weight: 800;
+  color: #000000;
   transition: all 0.1s ease;
   user-select: none;
 }
@@ -96,7 +83,7 @@ h1, h2, h3, h4, .font-heading {
   box-shadow: 1px 1px 0px #000000;
 }
 
-/* Washi tape sticker in Mango Popsicle Gold #F2B949 */
+/* Washi tape sticker in Mango Popsicle Yellow #F2E829 */
 .washi-tape {
   position: absolute;
   top: -10px;
@@ -104,11 +91,10 @@ h1, h2, h3, h4, .font-heading {
   transform: translateX(-50%) rotate(-2deg);
   width: 90px;
   height: 22px;
-  background-color: #F2B949;
-  border: 1.5px dashed rgba(0, 0, 0, 0.4);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  background-color: #F2E829;
+  border: 2px dashed #000000;
+  box-shadow: 2px 2px 0px #000000;
   z-index: 10;
-  opacity: 0.95;
 }
 
 /* Perforated concert ticket edge */
@@ -118,13 +104,13 @@ h1, h2, h3, h4, .font-heading {
                     radial-gradient(circle at 100% 50%, transparent 12px, currentColor 13px);
 }
 
-/* Polaroid Card */
+/* Polaroid Card in Mango Popsicle Cream */
 .polaroid {
-  background: #ffffff;
-  color: #111111;
+  background: #EDD377;
+  color: #000000;
   padding: 10px 10px 24px 10px;
-  border: 3px solid #000;
-  box-shadow: 5px 5px 0px #000;
+  border: 3px solid #000000;
+  box-shadow: 5px 5px 0px #000000;
   transform: rotate(-1deg);
   transition: transform 0.2s ease;
 }
@@ -138,11 +124,11 @@ h1, h2, h3, h4, .font-heading {
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #16110a;
+  background: #EDD377;
 }
 ::-webkit-scrollbar-thumb {
   background: #F2B949;
-  border: 2px solid #000;
+  border: 2px solid #000000;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {

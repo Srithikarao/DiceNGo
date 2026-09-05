@@ -447,5 +447,22 @@ export const api = {
       body: formData,
     });
     return res.json();
+  },
+
+  async createFoodPlace(adminKey: string, payload: any) {
+    if (!API_BASE) return staticClient.createFoodPlace(payload);
+    try {
+      const res = await fetch(`${API_BASE}/admin/food`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Admin-Key": adminKey,
+        },
+        body: JSON.stringify(payload),
+      });
+      return await res.json();
+    } catch {
+      return staticClient.createFoodPlace(payload);
+    }
   }
 };
