@@ -14,7 +14,7 @@ export const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete, isRe
     if (isReturningUser) {
       const timer = setTimeout(() => {
         onComplete();
-      }, 2200);
+      }, 2000);
       return () => clearTimeout(timer);
     }
 
@@ -33,65 +33,65 @@ export const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete, isRe
 
   if (isReturningUser) {
     return (
-      <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#100f18] px-4 text-center scanlines">
-        <div className="text-6xl mb-4 animate-bounce">🎲</div>
-        <h1 className="font-pixel text-xl sm:text-2xl text-arcade-yellow mb-3 tracking-wider">
+      <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#16110a] px-4 text-center scanlines">
+        <div className="text-6xl mb-4 animate-bounce">🥭</div>
+        <h1 className="font-pixel text-xl sm:text-2xl text-[#F2E829] mb-3 tracking-wider">
           DICE & GO WARANGAL
         </h1>
-        <p className="text-arcade-cyan font-heading text-lg italic">
+        <p className="text-[#EDD377] font-heading text-lg italic">
           "Where are we going today?"
         </p>
-        <div className="mt-6 w-36 h-2 bg-gray-800 rounded-full overflow-hidden border border-black">
-          <div className="h-full bg-arcade-pink animate-[pulse_1s_infinite] w-full"></div>
+        <div className="mt-6 w-36 h-2.5 bg-[#241b12] rounded-full overflow-hidden border-2 border-black">
+          <div className="h-full bg-gradient-to-r from-[#F2E829] via-[#F2B949] to-[#F27430] animate-[pulse_1s_infinite] w-full"></div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col items-center justify-between bg-[#12111A] p-6 text-center scanlines overflow-hidden">
+    <div className="fixed inset-0 z-50 flex flex-col items-center justify-between bg-[#16110a] p-6 text-center scanlines overflow-hidden">
       {/* Skip Button */}
       <div className="w-full flex justify-end">
         <button
           onClick={() => { sound.playClick(); onComplete(); }}
-          className="text-xs font-mono uppercase bg-gray-800 hover:bg-gray-700 text-gray-300 px-3 py-1.5 rounded border border-gray-600"
+          className="text-xs font-mono uppercase bg-[#241b12] hover:bg-[#302419] text-[#EDD377] px-3 py-1.5 rounded-lg border-2 border-black font-bold"
         >
           Skip Intro ⏭
         </button>
       </div>
 
-      {/* Main Animated Comic Box */}
+      {/* Main Animated Comic Box in Mango Popsicle Palette */}
       <div className="w-full max-w-sm flex-1 flex flex-col items-center justify-center relative my-4">
         {step >= 0 && step < 5 && (
           <div className="space-y-4 w-full">
-            <div className="text-xs font-pixel text-arcade-yellow mb-2 tracking-widest uppercase">
+            <div className="text-xs font-pixel text-[#F2E829] mb-2 tracking-widest uppercase font-bold">
               📍 Somewhere in Hanamkonda... 6:30 PM
             </div>
 
             {/* Speech bubble 1 */}
             {step >= 1 && (
-              <div className="bg-arcade-yellow text-black font-heading font-bold p-3 rounded-lg border-2 border-black shadow-retro transform -rotate-2 animate-[fadeIn_0.3s_ease-out]">
+              <div className="bg-[#F2E829] text-black font-heading font-extrabold p-3.5 rounded-xl border-3 border-black shadow-retro transform -rotate-2 animate-[fadeIn_0.3s_ease-out]">
                 🍜 "Bro, biryani tindaama Kakatiya Deluxe lo?"
               </div>
             )}
 
             {/* Speech bubble 2 */}
             {step >= 2 && (
-              <div className="bg-arcade-cyan text-black font-heading font-bold p-3 rounded-lg border-2 border-black shadow-retro transform rotate-2 animate-[fadeIn_0.3s_ease-out]">
+              <div className="bg-[#F2B949] text-black font-heading font-extrabold p-3.5 rounded-xl border-3 border-black shadow-retro transform rotate-2 animate-[fadeIn_0.3s_ease-out]">
                 🌅 "Voddu ra, sunset ki Waddepally lake podam!"
               </div>
             )}
 
             {/* Speech bubble 3 */}
             {step >= 3 && (
-              <div className="bg-arcade-pink text-white font-heading font-bold p-3 rounded-lg border-2 border-black shadow-retro transform -rotate-1 animate-[fadeIn_0.3s_ease-out]">
-                🎟️ "Hunter road drive-in lo music gig undi anta!"
+              <div className="bg-[#F27430] text-black font-heading font-extrabold p-3.5 rounded-xl border-3 border-black shadow-retro transform -rotate-1 animate-[fadeIn_0.3s_ease-out]">
+                🎟️ "Hunter road drive-in lo mango dessert & music undi anta!"
               </div>
             )}
 
             {/* Confusion state */}
             {step >= 4 && (
-              <div className="bg-red-600 text-white font-pixel text-xs p-3 rounded-lg border-2 border-black shadow-retro animate-[bounce_0.5s_infinite]">
+              <div className="bg-red-600 text-white font-pixel text-xs p-3.5 rounded-xl border-3 border-black shadow-retro animate-[bounce_0.5s_infinite]">
                 🤯 30 MINUTES WASTED. NOBODY CAN DECIDE.
               </div>
             )}
@@ -104,16 +104,16 @@ export const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete, isRe
             <div className="text-7xl mb-4 animate-[spin_1.5s_ease-in-out]">
               🎲
             </div>
-            <div className="font-pixel text-sm text-arcade-pink mb-2 uppercase tracking-widest">
+            <div className="font-pixel text-sm text-[#F27430] mb-2 uppercase tracking-widest font-bold">
               STOP DECIDING.
             </div>
-            <div className="font-pixel text-2xl sm:text-3xl text-arcade-yellow mb-4">
-              LET'S GO.
+            <div className="font-pixel text-2xl sm:text-3xl text-[#F2E829] mb-4">
+              LET'S GO 🥭
             </div>
-            <div className="bg-arcade-card p-4 rounded-xl border-3 border-black shadow-retro-lg max-w-xs text-center mb-6">
-              <div className="text-xs text-gray-400 font-mono mb-1">Warangal • Hanamkonda • Kazipet</div>
+            <div className="bg-[#241b12] p-4 rounded-xl border-3 border-black shadow-retro-lg max-w-xs text-center mb-6">
+              <div className="text-xs text-[#EDD377] font-mono mb-1">Warangal • Hanamkonda • Kazipet</div>
               <h2 className="font-pixel text-lg text-white">DICE & GO</h2>
-              <p className="text-arcade-cyan text-sm font-heading mt-2">
+              <p className="text-[#F2B949] text-sm font-heading mt-2 font-bold">
                 "Stop arguing. Let the dice decide."
               </p>
             </div>
@@ -126,14 +126,14 @@ export const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete, isRe
         {step >= 5 ? (
           <button
             onClick={() => { sound.playJackpot(); onComplete(); }}
-            className="w-full py-4 bg-arcade-yellow hover:bg-yellow-400 text-black font-pixel text-sm tracking-wider uppercase rounded-xl retro-btn flex items-center justify-center gap-2"
+            className="w-full py-4 bg-[#F2E829] hover:bg-[#F2B949] text-black font-pixel text-sm tracking-wider uppercase rounded-xl retro-btn flex items-center justify-center gap-2 shadow-retro-lg"
           >
             LET'S ROLL 🎲
           </button>
         ) : (
           <button
             onClick={() => { setStep(5); sound.playRollTick(450); }}
-            className="w-full py-3 bg-gray-800 text-arcade-cyan font-heading font-bold text-sm rounded-xl border-2 border-black shadow-retro"
+            className="w-full py-3 bg-[#241b12] text-[#EDD377] hover:text-[#F2E829] font-heading font-bold text-sm rounded-xl border-2 border-black shadow-retro"
           >
             Ready to roll? Tap here ⚡
           </button>

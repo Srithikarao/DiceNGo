@@ -70,6 +70,10 @@ class SoundEngine {
     osc.stop(this.ctx.currentTime + 0.04);
   }
 
+  public playDiceRoll() {
+    this.playRollTick(450);
+  }
+
   // Dramatic Dice Win / Jackpot Fanfare
   public playJackpot() {
     if (this.muted) return;
@@ -95,6 +99,10 @@ class SoundEngine {
     });
   }
 
+  public playSuccess() {
+    this.playJackpot();
+  }
+
   // Stamp thud for confirming a visit or calendar stamp
   public playStamp() {
     if (this.muted) return;
@@ -104,11 +112,11 @@ class SoundEngine {
     const osc = this.ctx.createOscillator();
     const gain = this.ctx.createGain();
 
-    osc.type = "sine";
+    osc.type = "triangle";
     osc.frequency.setValueAtTime(150, this.ctx.currentTime);
     osc.frequency.exponentialRampToValueAtTime(40, this.ctx.currentTime + 0.12);
 
-    gain.gain.setValueAtTime(0.3, this.ctx.currentTime);
+    gain.gain.setValueAtTime(0.35, this.ctx.currentTime);
     gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.12);
 
     osc.connect(gain);

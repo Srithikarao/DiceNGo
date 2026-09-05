@@ -1,12 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Press+Start+2P&family=Space+Grotesk:wght@500;600;700;800&display=swap');
 @import "tailwindcss";
 
-/* Base Reset & Typography */
+@theme {
+  --color-mango-gold: #F2B949;
+  --color-mango-cream: #EDD377;
+  --color-mango-yellow: #F2E829;
+  --color-mango-orange: #F27430;
+
+  --color-arcade-yellow: #F2E829;
+  --color-arcade-orange: #F27430;
+  --color-arcade-gold: #F2B949;
+  --color-arcade-cream: #EDD377;
+
+  /* Remapped arcade colors to mango popsicle palette */
+  --color-arcade-pink: #F27430;
+  --color-arcade-cyan: #F2B949;
+  --color-arcade-green: #EDD377;
+  --color-arcade-diner: #F27430;
+
+  --color-arcade-bg: #16110a;
+  --color-arcade-card: #241b12;
+  --color-arcade-card-hover: #322519;
+}
+
+/* Base Reset & Typography with Mango Popsicle Vibe */
 body {
   margin: 0;
   padding: 0;
-  background-color: #100f18;
-  color: #f1f0f5;
+  background-color: #16110a;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(242, 185, 73, 0.18) 0%, transparent 60%),
+    radial-gradient(circle at 85% 30%, rgba(242, 116, 48, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 15% 80%, rgba(242, 232, 41, 0.08) 0%, transparent 50%);
+  background-attachment: fixed;
+  color: #fdfcf7;
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -21,7 +48,7 @@ h1, h2, h3, h4, .font-heading {
   font-family: 'Press Start 2P', monospace;
 }
 
-/* Retro CRT scanlines overlay */
+/* Retro CRT scanlines overlay with warm popsicle tint */
 .scanlines {
   position: relative;
 }
@@ -30,14 +57,14 @@ h1, h2, h3, h4, .font-heading {
   display: block;
   position: absolute;
   top: 0; left: 0; bottom: 0; right: 0;
-  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  background: linear-gradient(rgba(22, 17, 10, 0) 50%, rgba(0, 0, 0, 0.3) 50%), linear-gradient(90deg, rgba(242, 185, 73, 0.04), rgba(242, 116, 48, 0.03), rgba(242, 232, 41, 0.04));
   z-index: 20;
   background-size: 100% 3px, 6px 100%;
   pointer-events: none;
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
-/* Retro Arcade Drop-Shadow Card */
+/* Retro Arcade Drop-Shadow Card with Mango border accent */
 .retro-card {
   border: 3px solid #000000;
   box-shadow: 4px 4px 0px #000000;
@@ -69,7 +96,7 @@ h1, h2, h3, h4, .font-heading {
   box-shadow: 1px 1px 0px #000000;
 }
 
-/* Washi tape sticker effect */
+/* Washi tape sticker in Mango Popsicle Gold #F2B949 */
 .washi-tape {
   position: absolute;
   top: -10px;
@@ -77,10 +104,11 @@ h1, h2, h3, h4, .font-heading {
   transform: translateX(-50%) rotate(-2deg);
   width: 90px;
   height: 22px;
-  background-color: rgba(255, 208, 39, 0.85);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  background-color: #F2B949;
+  border: 1.5px dashed rgba(0, 0, 0, 0.4);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
   z-index: 10;
-  opacity: 0.9;
+  opacity: 0.95;
 }
 
 /* Perforated concert ticket edge */
@@ -104,18 +132,39 @@ h1, h2, h3, h4, .font-heading {
   transform: rotate(0deg) scale(1.02);
 }
 
-/* Custom retro scrollbar */
+/* Custom retro scrollbar in Mango Popsicle hues */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #151421;
+  background: #16110a;
 }
 ::-webkit-scrollbar-thumb {
-  background: #FFD027;
+  background: #F2B949;
   border: 2px solid #000;
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #FF3366;
+  background: #F27430;
+}
+
+/* Hide scrollbar utility for mobile carousels */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Mango Popsicle Gradients & Helper Classes */
+.bg-mango-gradient {
+  background: linear-gradient(135deg, #F2E829 0%, #F2B949 50%, #F27430 100%);
+}
+.bg-mango-warm {
+  background: linear-gradient(135deg, #F2B949 0%, #F27430 100%);
+}
+.bg-mango-cream-gradient {
+  background: linear-gradient(135deg, #EDD377 0%, #F2B949 100%);
 }

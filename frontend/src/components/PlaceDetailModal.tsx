@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Navigation, Heart, CheckCircle2, MapPin, Clock } from 'lucide-react';
+import { X, MapPin, Navigation, Heart, CheckCircle2, Clock, ExternalLink, Award } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { api } from '../services/api';
 import { sound } from '../services/sound';
@@ -8,8 +8,8 @@ interface PlaceDetailModalProps {
   id: number | null;
   type: 'food' | 'explore' | 'event' | null;
   onClose: () => void;
-  onSaveFavorite: (id: number, type: string) => void;
-  onConfirmVisit: (id: number, type: string) => void;
+  onSaveFavorite: (id: number, type: 'food' | 'explore' | 'event') => void;
+  onConfirmVisit: (id: number, type: 'food' | 'explore' | 'event') => void;
 }
 
 export const PlaceDetailModal: React.FC<PlaceDetailModalProps> = ({
@@ -30,52 +30,50 @@ export const PlaceDetailModal: React.FC<PlaceDetailModalProps> = ({
     }
 
     setLoading(true);
-    const fetchDetail = async () => {
-      try {
-        if (type === 'food') {
-          const res = await api.getFoodDetail(id);
-          setData(res);
-          setVisited(res.is_visited);
-        } else if (type === 'explore') {
-          const res = await api.getExploreDetail(id);
-          setData(res);
-          setVisited(res.is_visited);
-        } else {
-          const res = await api.getEvents();
-          const ev = (res.items || []).find((x: any) => x.id === id);
-          setData(ev);
-        }
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
+    setVisited(false);
 
-    fetchDetail();
+    let fetcher;
+    if (type === 'food') fetcher = api.getFoodDetail(id);
+    else if (type === 'explore') fetcher = api.getExploreDetail(id);
+    else fetcher = api.getEvents().then(res => res.items.find((ev: any) => ev.id === id));
+
+    fetcher
+      .then(res => {
+        setData(res);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error(err);
+        setLoading(false);
+      });
   }, [id, type]);
 
   if (!id || !type) return null;
 
   const handleVisit = () => {
     sound.playStamp();
-    confetti({ particleCount: 50, spread: 60 });
+    confetti({
+      particleCount: 50,
+      spread: 60,
+      colors: ['#F2E829', '#F2B949', '#F27430', '#EDD377']
+    });
     setVisited(true);
     onConfirmVisit(id, type);
   };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm overflow-y-auto">
-      <div className="bg-arcade-card w-full max-w-sm rounded-2xl border-3 border-black shadow-retro-xl p-5 relative max-h-[90vh] overflow-y-auto my-auto">
+      <div className="bg-[#241b12] w-full max-w-sm rounded-2xl border-3 border-black shadow-retro-xl p-5 relative max-h-[90vh] overflow-y-auto my-auto">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 bg-gray-800 text-gray-400 hover:text-white p-1.5 rounded-full z-10"
+          className="absolute top-4 right-4 bg-[#18130d] text-gray-400 hover:text-white p-1.5 rounded-full z-10 border border-black"
+          aria-label="Close"
         >
           <X size={18} />
         </button>
 
         {loading && (
-          <div className="text-center py-16 font-mono text-xs text-gray-400">
+          <div className="text-center py-16 font-mono text-xs text-[#EDD377]">
             Loading details... 🧭
           </div>
         )}
@@ -89,7 +87,7 @@ export const PlaceDetailModal: React.FC<PlaceDetailModalProps> = ({
                 alt={data.name || data.event_name}
                 className="w-full h-full object-cover"
               />
-              <div className="absolute top-2 left-2 px-2 py-0.5 bg-black/80 text-arcade-yellow font-mono text-[10px] rounded border border-arcade-yellow/40">
+              <div className="absolute top-2 left-2 px-2 py-0.5 bg-[#18130d]/90 text-[#F2E829] font-mono text-[10px] rounded border border-black font-bold">
                 {data.category}
               </div>
             </div>
@@ -99,94 +97,95 @@ export const PlaceDetailModal: React.FC<PlaceDetailModalProps> = ({
               {data.name || data.event_name}
             </h2>
 
-            <div className="flex items-center gap-2 text-xs text-gray-400 font-mono mt-1">
-              <MapPin size={13} className="text-arcade-cyan" />
-              <span>{data.area || "Warangal"}</span>
-              {data.rating && <span className="text-amber-400 font-bold">• ★ {data.rating}</span>}
-              {data.price_range && <span>• {data.price_range}</span>}
+            <div className="flex items-center gap-2 text-xs text-gray-300 font-mono mt-1 flex-wrap">
+              <span className="flex items-center gap-1 text-[#F2B949]">
+                <MapPin size={13} /> {data.area || "Warangal"}
+              </span>
+              {data.rating && <span className="text-[#F2E829] font-bold">• ★ {data.rating}</span>}
+              {data.price_range && <span className="text-[#EDD377]">• {data.price_range}</span>}
+              {data.entry_fee && <span className="text-[#EDD377]">• {data.entry_fee}</span>}
             </div>
 
             {/* Facilities Badges */}
             <div className="flex flex-wrap gap-1.5 my-3">
               {data.veg && (
-                <span className="text-[10px] px-2 py-0.5 bg-emerald-950 text-emerald-400 border border-emerald-800 rounded font-mono">
-                  🌱 Veg
+                <span className="text-[10px] px-2 py-0.5 bg-[#EDD377]/20 text-[#EDD377] border border-[#EDD377]/50 rounded font-mono font-bold">
+                  🌱 Veg Available
                 </span>
               )}
               {data.non_veg && (
-                <span className="text-[10px] px-2 py-0.5 bg-rose-950 text-rose-400 border border-rose-800 rounded font-mono">
+                <span className="text-[10px] px-2 py-0.5 bg-[#F27430]/20 text-[#F27430] border border-[#F27430]/50 rounded font-mono font-bold">
                   🍗 Non-Veg
                 </span>
               )}
               {data.parking && (
-                <span className="text-[10px] px-2 py-0.5 bg-gray-800 text-gray-300 border border-gray-700 rounded font-mono">
+                <span className="text-[10px] px-2 py-0.5 bg-[#F2B949]/20 text-[#F2B949] border border-[#F2B949]/50 rounded font-mono">
                   🅿️ Parking
                 </span>
               )}
-              {data.indoor_seating && (
-                <span className="text-[10px] px-2 py-0.5 bg-gray-800 text-gray-300 border border-gray-700 rounded font-mono">
-                  ❄️ AC Seating
+              {data.best_time && (
+                <span className="text-[10px] px-2 py-0.5 bg-[#18130d] text-gray-300 border border-black rounded font-mono">
+                  🕒 {data.best_time}
                 </span>
               )}
             </div>
 
-            {/* Timings */}
-            <div className="bg-[#12111A] p-2.5 rounded-xl border border-gray-800 flex items-center justify-between text-xs font-mono mb-3">
-              <span className="text-gray-400 flex items-center gap-1">
-                <Clock size={13} /> {data.opening_time || "Morning"} - {data.closing_time || "Night"}
-              </span>
-              <span className={data.is_open_now ? "text-emerald-400 font-bold" : "text-gray-400"}>
-                {data.is_open_now ? "Open Now" : "Standard Hours"}
-              </span>
-            </div>
+            {/* Description */}
+            <p className="text-xs text-gray-300 font-heading leading-relaxed mb-3">
+              {data.description || "A top-rated spot to experience the authentic vibe of Warangal, Hanamkonda & Kazipet."}
+            </p>
 
-            {/* Best known for */}
+            {/* Must Try or Highlights */}
             {data.best_known_for && (
-              <div className="mb-3 p-2.5 bg-arcade-yellow/10 rounded-xl border border-arcade-yellow/30 text-xs font-heading">
-                <span className="text-arcade-yellow font-bold">Must Try: </span>
-                <span className="text-gray-200">{data.best_known_for}</span>
+              <div className="mb-3 p-2.5 bg-[#F2B949]/15 rounded-xl border border-[#F2B949]/40 text-xs font-heading">
+                <span className="text-[#F2B949] font-extrabold">Must Try: </span>
+                <span className="text-white font-medium">{data.best_known_for}</span>
               </div>
             )}
 
-            {/* Description */}
-            <p className="text-xs text-gray-300 font-heading leading-relaxed mb-4">
-              {data.description}
-            </p>
-
-            {/* Address */}
-            <div className="text-[11px] text-gray-400 font-mono mb-5">
-              <b className="text-gray-300">Address:</b> {data.address || `${data.area}, Warangal, Telangana`}
+            {/* Timings & Address */}
+            <div className="space-y-1.5 p-2.5 bg-[#18130d] rounded-xl border-2 border-black text-xs font-mono text-gray-300 mb-4">
+              <div className="flex items-center gap-1.5">
+                <Clock size={13} className="text-[#F2E829]" />
+                <span>{data.opening_time || "10:00 AM"} - {data.closing_time || "11:00 PM"}</span>
+              </div>
+              <div className="text-[11px] text-gray-400 pl-4">
+                {data.address || "Warangal Tri-City, Telangana"}
+              </div>
             </div>
 
-            {/* Primary Action: LET'S GO */}
+            {/* Action Buttons in Mango Popsicle Palette */}
             <div className="space-y-2">
               <a
-                href={data.maps_url || `https://maps.google.com/?q=${data.latitude},${data.longitude}`}
+                href={data.maps_url || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent((data.name || data.event_name) + " Warangal")}`}
                 target="_blank"
-                rel="noreferrer"
-                className="w-full py-3 bg-arcade-yellow hover:bg-yellow-400 text-black font-heading font-extrabold text-sm rounded-xl retro-btn flex items-center justify-center gap-2"
+                rel="noopener noreferrer"
+                className="w-full py-3 bg-[#F2E829] hover:bg-[#F2B949] text-black font-heading font-extrabold text-sm rounded-xl retro-btn flex items-center justify-center gap-2 transition-colors"
               >
-                <Navigation size={16} /> LET'S GO 📍
+                <Navigation size={16} /> Open in Google Maps 📍
               </a>
 
-              {/* Visit Confirmation Button */}
               <button
                 onClick={handleVisit}
-                className={`w-full py-2.5 text-xs font-heading font-bold rounded-xl retro-btn flex items-center justify-center gap-1.5 transition-colors ${
+                className={`w-full py-2.5 font-heading font-extrabold text-xs rounded-xl border-2 border-black flex items-center justify-center gap-1.5 transition-colors ${
                   visited
-                    ? 'bg-emerald-600 text-white'
-                    : 'bg-arcade-green hover:bg-emerald-400 text-black'
+                    ? 'bg-emerald-500 text-black'
+                    : 'bg-[#EDD377] hover:bg-[#F2B949] text-black'
                 }`}
               >
-                <CheckCircle2 size={16} />
-                {visited ? "✓ Visited! Recorded in Adventure Diary 🎉" : "✓ I Went Here (Confirm Visit)"}
+                <CheckCircle2 size={15} />
+                {visited ? "Logged in Adventure Diary!" : "Mark Visited & Add XP"}
               </button>
 
               <button
-                onClick={() => { sound.playClick(); onSaveFavorite(id, type); }}
-                className="w-full py-2 bg-gray-800 hover:bg-gray-700 text-arcade-pink font-heading font-bold text-xs rounded-xl border-2 border-black flex items-center justify-center gap-1.5"
+                onClick={() => {
+                  sound.playClick();
+                  onSaveFavorite(id, type);
+                  onClose();
+                }}
+                className="w-full py-2 bg-[#18130d] hover:bg-[#302419] text-[#F27430] font-heading font-bold text-xs rounded-xl border-2 border-black flex items-center justify-center gap-1.5 transition-colors"
               >
-                <Heart size={14} /> Save to Scrapbook ❤️
+                <Heart size={14} /> Save to Scrapbook
               </button>
             </div>
           </div>

@@ -12,7 +12,7 @@ export const DynamicGreeting: React.FC<DynamicGreetingProps> = ({ userName = "Ex
 
     if (hour >= 5 && hour < 12) {
       const morningGreetings = [
-        `Morning, ${name} ☀️ Had breakfast yet?`,
+        `Morning, ${name} ☀️ Chai or mango popsicle today?`,
         `${name}, chai first or adventure first? ☕`,
         `Good morning, ${name}. Where are we escaping to today?`,
         `Fresh day in Warangal! What's the morning mission?`
@@ -20,8 +20,8 @@ export const DynamicGreeting: React.FC<DynamicGreetingProps> = ({ userName = "Ex
       return morningGreetings[Math.floor(Math.random() * morningGreetings.length)];
     } else if (hour >= 12 && hour < 17) {
       const afternoonGreetings = [
-        `${name}, hungry? 🍛 Biryani calling?`,
-        `Afternoon slump, ${name}? Let's go grab a cold brew.`,
+        `${name}, hungry? 🍛 Biryani or ice cream calling?`,
+        `Afternoon slump, ${name}? Let's grab something chilled.`,
         `Have you explored anywhere new today, ${name}?`,
         `Sun is high in Hanamkonda. Time to refuel.`
       ];
@@ -39,7 +39,7 @@ export const DynamicGreeting: React.FC<DynamicGreetingProps> = ({ userName = "Ex
         `${name}, still awake? 🌙 Late-night food mission?`,
         `Hunter Road drive-in is calling your name, ${name}.`,
         `Night owl hours in Kazipet! Where are we rolling?`,
-        `The city is quiet, but hunger never sleeps, ${name}.`
+        `The city is quiet, but cravings never sleep, ${name}.`
       ];
       return nightGreetings[Math.floor(Math.random() * nightGreetings.length)];
     }
@@ -47,15 +47,15 @@ export const DynamicGreeting: React.FC<DynamicGreetingProps> = ({ userName = "Ex
 
   return (
     <div className="px-4 pt-3 pb-1 max-w-md mx-auto">
-      <div className="bg-gradient-to-r from-arcade-card to-[#1a1727] p-3.5 rounded-xl border-2 border-black shadow-retro flex items-center justify-between">
+      <div className="bg-gradient-to-r from-[#241b12] to-[#342416] p-3.5 rounded-xl border-3 border-black shadow-retro flex items-center justify-between">
         <div>
           <h2 className="font-heading font-extrabold text-base text-white leading-snug">
             {greeting}
           </h2>
-          <div className="text-[11px] text-arcade-cyan font-mono mt-0.5 flex items-center gap-1.5">
+          <div className="text-[11px] text-[#EDD377] font-mono mt-0.5 flex items-center gap-1.5 flex-wrap">
             <span>📍 Warangal • Hanamkonda • Kazipet</span>
             {totalVisits > 0 && (
-              <span className="text-arcade-yellow font-bold">• {totalVisits} visits logged</span>
+              <span className="text-[#F2E829] font-bold">• {totalVisits} visits logged</span>
             )}
           </div>
         </div>

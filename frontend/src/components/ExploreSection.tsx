@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Compass, Heart, Navigation, CheckCircle2, Clock, Camera } from 'lucide-react';
+import { Compass, Heart, Navigation, CheckCircle2 } from 'lucide-react';
 import { api } from '../services/api';
 import { sound } from '../services/sound';
 
@@ -26,7 +26,7 @@ export const ExploreSection: React.FC<ExploreSectionProps> = ({
   useEffect(() => {
     let isMounted = true;
     setLoading(true);
-    api.getExplore({ category: category === "All" ? undefined : category })
+    api.getExplore({ category: category === "All" ? undefined : category, limit: 60 })
       .then(data => {
         if (isMounted) setPlaces(data.items || []);
       })
@@ -39,35 +39,35 @@ export const ExploreSection: React.FC<ExploreSectionProps> = ({
 
   return (
     <div className="px-4 py-4 max-w-md mx-auto">
-      {/* Retro Postcard Header */}
-      <div className="bg-gradient-to-r from-arcade-cyan/30 to-purple-900/30 p-4 rounded-2xl border-3 border-black shadow-retro-lg mb-4 relative overflow-hidden">
+      {/* Retro Postcard Header in Mango Popsicle Palette */}
+      <div className="bg-gradient-to-r from-[#F2B949]/35 via-[#F27430]/25 to-[#F2E829]/15 p-4 rounded-2xl border-3 border-black shadow-retro-lg mb-4 relative overflow-hidden">
         <div className="washi-tape"></div>
         <div className="flex items-center justify-between">
           <div>
-            <div className="text-[10px] font-pixel text-arcade-cyan uppercase tracking-widest">
+            <div className="text-[10px] font-pixel text-[#F2E829] uppercase tracking-widest">
               WARANGAL TRAVEL POSTCARD
             </div>
             <h2 className="font-pixel text-base sm:text-lg text-white mt-1">
               EXPLORE 🌅
             </h2>
-            <p className="text-xs text-gray-300 font-heading mt-0.5">
-              Temples, sunset lakes, ruins, and breeze spots.
+            <p className="text-xs text-[#EDD377] font-heading mt-0.5">
+              108 Temples, sunset lakes, ruins, and breeze spots.
             </p>
           </div>
-          <span className="text-4xl">📸</span>
+          <span className="text-4xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">📸</span>
         </div>
       </div>
 
       {/* Category Scroll */}
-      <div className="flex items-center gap-1.5 overflow-x-auto pb-2 scrollbar-none mb-3">
+      <div className="flex items-center gap-1.5 overflow-x-auto pb-2 no-scrollbar mb-3">
         {CATEGORIES.map(cat => (
           <button
             key={cat}
             onClick={() => { sound.playClick(); setCategory(cat); }}
-            className={`whitespace-nowrap px-3 py-1.5 rounded-xl font-heading font-bold text-xs border-2 border-black transition-colors ${
+            className={`whitespace-nowrap px-3 py-1.5 rounded-xl font-heading font-bold text-xs border-2 border-black transition-all ${
               category === cat
-                ? 'bg-arcade-cyan text-black shadow-retro-sm'
-                : 'bg-arcade-card text-gray-300 hover:text-white'
+                ? 'bg-[#F2B949] text-black shadow-retro-sm font-extrabold translate-y-[-1px]'
+                : 'bg-[#241b12] text-[#EDD377] hover:text-[#F2B949] hover:bg-[#302419]'
             }`}
           >
             {cat}
@@ -76,16 +76,22 @@ export const ExploreSection: React.FC<ExploreSectionProps> = ({
       </div>
 
       {loading && (
-        <div className="text-center py-10 font-mono text-xs text-gray-400">
+        <div className="text-center py-10 font-mono text-xs text-[#EDD377]">
           Unfolding city map... 🗺️
         </div>
       )}
 
       {!loading && places.length === 0 && (
-        <div className="text-center py-10 bg-arcade-card rounded-2xl border-2 border-black p-6">
+        <div className="text-center py-10 bg-[#241b12] rounded-2xl border-3 border-black p-6 shadow-retro">
           <div className="text-4xl mb-2">🧭</div>
-          <h3 className="font-heading font-bold text-sm text-white">The city is hiding something!</h3>
+          <h3 className="font-heading font-bold text-sm text-white">No spots found for this filter</h3>
           <p className="text-xs text-gray-400 font-mono mt-1">Try another category to discover more landmarks.</p>
+          <button
+            onClick={() => setCategory("All")}
+            className="mt-3 px-4 py-2 bg-[#F2B949] text-black font-heading font-extrabold text-xs rounded-xl retro-btn"
+          >
+            Show All 108 Explore Places
+          </button>
         </div>
       )}
 
@@ -94,25 +100,25 @@ export const ExploreSection: React.FC<ExploreSectionProps> = ({
         {places.map(p => (
           <div
             key={p.id}
-            className="bg-arcade-card rounded-2xl border-2 border-black shadow-retro p-3.5 hover:border-arcade-cyan transition-all"
+            className="bg-[#241b12] rounded-2xl border-3 border-black shadow-retro p-3.5 hover:border-[#F2B949] transition-all"
           >
             <div className="flex items-start justify-between gap-3">
               <div className="flex-1 cursor-pointer" onClick={() => onSelectDetail(p.id, 'explore')}>
-                <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-mono px-2 py-0.5 bg-[#12111A] text-arcade-cyan rounded border border-gray-800">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="text-[10px] font-mono px-2 py-0.5 bg-[#18130d] text-[#F2B949] rounded border border-black font-bold">
                     {p.category}
                   </span>
-                  <span className="text-[10px] text-gray-400 font-mono">
+                  <span className="text-[10px] text-gray-300 font-mono">
                     📍 {p.area}
                   </span>
                   {p.entry_fee && p.entry_fee.toLowerCase().includes("free") && (
-                    <span className="text-[9px] font-bold px-1.5 py-0.5 bg-emerald-950 text-emerald-300 border border-emerald-800 rounded">
+                    <span className="text-[9px] font-extrabold px-1.5 py-0.2 bg-[#EDD377] text-black border border-black rounded">
                       FREE ENTRY
                     </span>
                   )}
                 </div>
 
-                <h3 className="font-heading font-extrabold text-base text-white mt-1 hover:text-arcade-cyan transition-colors">
+                <h3 className="font-heading font-extrabold text-base text-white mt-1 hover:text-[#F2B949] transition-colors">
                   {p.name}
                 </h3>
 
@@ -120,43 +126,36 @@ export const ExploreSection: React.FC<ExploreSectionProps> = ({
                   {p.description}
                 </p>
 
-                <div className="flex items-center gap-3 mt-2 text-[11px] text-gray-400 font-mono">
-                  <span className="text-amber-400 font-bold">★ {p.rating} ({p.review_count})</span>
-                  <span>{p.best_time || "Morning / Sunset"}</span>
+                <div className="flex items-center gap-3 mt-2 text-[11px] font-mono">
+                  <span className="text-[#F2E829] font-bold">★ {p.rating} ({p.review_count || 50})</span>
+                  <span className="text-[#EDD377]">🕒 {p.best_time || "Morning / Sunset"}</span>
                 </div>
               </div>
 
               {/* Actions */}
-              <div className="flex flex-col gap-1.5 items-end">
+              <div className="flex flex-col gap-1.5">
                 <button
                   onClick={() => { sound.playClick(); onSaveFavorite(p.id, 'explore'); }}
-                  className={`p-2 rounded-xl border border-black shadow-retro-sm transition-colors ${
-                    p.is_favorite ? 'bg-arcade-pink text-white' : 'bg-gray-800 text-gray-400 hover:text-white'
-                  }`}
+                  className="p-2 bg-[#18130d] hover:bg-[#302419] text-[#F27430] rounded-xl border-2 border-black shadow-retro-sm transition-colors"
                   title="Save to Scrapbook"
                 >
-                  <Heart size={15} fill={p.is_favorite ? "currentColor" : "none"} />
+                  <Heart size={16} />
                 </button>
 
-                <a
-                  href={p.maps_url || `https://maps.google.com/?q=${p.latitude},${p.longitude}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="p-2 bg-arcade-cyan text-black rounded-xl border border-black shadow-retro-sm hover:bg-cyan-300"
-                  title="Navigate"
+                <button
+                  onClick={() => { sound.playClick(); onConfirmVisit(p.id, 'explore'); }}
+                  className="p-2 bg-[#18130d] hover:bg-[#302419] text-[#EDD377] hover:text-[#F2E829] rounded-xl border-2 border-black shadow-retro-sm transition-colors"
+                  title="Mark Visited"
                 >
-                  <Navigation size={15} />
-                </a>
+                  <CheckCircle2 size={16} />
+                </button>
 
                 <button
-                  onClick={() => { sound.playStamp(); onConfirmVisit(p.id, 'explore'); }}
-                  className={`px-2 py-1 text-[10px] font-heading font-bold rounded-lg border border-black shadow-retro-sm flex items-center gap-1 ${
-                    p.is_visited ? 'bg-emerald-600 text-white' : 'bg-gray-800 text-arcade-green hover:bg-gray-700'
-                  }`}
-                  title="Confirm Visit"
+                  onClick={() => { sound.playClick(); onSelectDetail(p.id, 'explore'); }}
+                  className="p-2 bg-[#F2B949] text-black rounded-xl border-2 border-black shadow-retro-sm hover:bg-[#F2E829] transition-colors"
+                  title="Details"
                 >
-                  <CheckCircle2 size={12} />
-                  {p.is_visited ? `Went (${p.visit_count})` : 'Went?'}
+                  <Navigation size={16} />
                 </button>
               </div>
             </div>
