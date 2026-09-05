@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Press+Start+2P&family=Space+Grotesk:wght@500;600;700;800&display=swap');
+@import "tailwindcss";
+
+/* Base Reset & Typography */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #100f18;
+  color: #f1f0f5;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, .font-heading {
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.font-pixel {
+  font-family: 'Press Start 2P', monospace;
+}
+
+/* Retro CRT scanlines overlay */
+.scanlines {
+  position: relative;
+}
+.scanlines::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 20;
+  background-size: 100% 3px, 6px 100%;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* Retro Arcade Drop-Shadow Card */
+.retro-card {
+  border: 3px solid #000000;
+  box-shadow: 4px 4px 0px #000000;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.retro-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #000000;
+}
+.retro-card:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #000000;
+}
+
+/* Retro Button */
+.retro-btn {
+  border: 3px solid #000000;
+  box-shadow: 3px 3px 0px #000000;
+  font-weight: 700;
+  transition: all 0.1s ease;
+  user-select: none;
+}
+.retro-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0px #000000;
+}
+.retro-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px #000000;
+}
+
+/* Washi tape sticker effect */
+.washi-tape {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 90px;
+  height: 22px;
+  background-color: rgba(255, 208, 39, 0.85);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  z-index: 10;
+  opacity: 0.9;
+}
+
+/* Perforated concert ticket edge */
+.ticket-edge {
+  position: relative;
+  background-image: radial-gradient(circle at 0 50%, transparent 12px, currentColor 13px),
+                    radial-gradient(circle at 100% 50%, transparent 12px, currentColor 13px);
+}
+
+/* Polaroid Card */
+.polaroid {
+  background: #ffffff;
+  color: #111111;
+  padding: 10px 10px 24px 10px;
+  border: 3px solid #000;
+  box-shadow: 5px 5px 0px #000;
+  transform: rotate(-1deg);
+  transition: transform 0.2s ease;
+}
+.polaroid:hover {
+  transform: rotate(0deg) scale(1.02);
+}
+
+/* Custom retro scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #151421;
+}
+::-webkit-scrollbar-thumb {
+  background: #FFD027;
+  border: 2px solid #000;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #FF3366;
+}
